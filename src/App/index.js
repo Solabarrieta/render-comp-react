@@ -10,6 +10,7 @@ import { EmptyTodos } from '../EmptyTodos';
 import { Modal } from "../Modal";
 import { TodoForm } from "../TodoForm";
 import { useTodos } from "./useTodo";
+import { TodoHeader } from "../TodoHeader";
 
 // localStorage.removeItem('TODOS_V1');
 // const defaultTodos = [
@@ -32,13 +33,25 @@ function App() {
     deleteTodo,
     openModal,
     setOpenModal,
-    addTodo
+    addTodo,
+    completedTodos,
+    totalTodos,
+    searchValue,
+    setSearchValue
   } = useTodos();
 
   return (
     <>
-      <TodoCounter />
-      <TodoSearch />
+      <TodoHeader>
+        <TodoCounter
+          completed={completedTodos}
+          total={totalTodos}
+        />
+        <TodoSearch
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+        />
+      </TodoHeader>
       <TodoList>
         {loading && (
           <>
