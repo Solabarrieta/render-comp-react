@@ -1,6 +1,15 @@
 import React from "react";
-import { TodoProvider } from "../TodoContext";
-import { AppUI } from "./AppUI"
+import { TodoCounter } from "../TodoCounter";
+import { TodoSearch } from "../TodoSearch";
+import { TodoList } from "../TodoList";
+import { TodoItem } from "../TodoItem";
+import { CreateTodoButton } from "../CreateTodoButton";
+import { LoadingTodo } from '../Loading';
+import { ErrorComponent } from '../Error';
+import { EmptyTodos } from '../EmptyTodos';
+import { Modal } from "../Modal";
+import { TodoForm } from "../TodoForm";
+import { useTodos } from "./useTodo";
 
 // localStorage.removeItem('TODOS_V1');
 // const defaultTodos = [
@@ -15,10 +24,51 @@ import { AppUI } from "./AppUI"
 
 
 function App() {
+  const {
+    loading,
+    error,
+    searchedTodos,
+    toggleCompleteTodo,
+    deleteTodo,
+    openModal,
+    setOpenModal,
+    addTodo
+  } = useTodos();
+
   return (
-    <TodoProvider>
-      <AppUI />
-    </TodoProvider>
+    <>
+      <TodoCounter />
+      <TodoSearch />
+      <TodoList>
+        {loading && (
+          <>
+            <LoadingTodo />
+            <LoadingTodo />
+            <LoadingTodo />
+          </>
+        )}
+        {error && <ErrorComponent />}
+        {!loading && searchedTodos.length < 1 && <EmptyTodos />}
+        {searchedTodos.map((todo) => (
+          <TodoItem
+            key={todo.text}
+            text={todo.text}
+            completed={todo.completed}
+            onComplete={() => toggleCompleteTodo(todo.text)}
+            onDelete={() => deleteTodo(todo.text)}
+          />
+        ))}
+      </TodoList>
+      <CreateTodoButton setOpenModal={setOpenModal} />
+      {openModal &&
+        <Modal>
+          <TodoForm
+            addTodo={addTodo}
+            setOpenModal={setOpenModal}
+          />
+        </Modal>
+      }
+    </>
   );
 }
 
