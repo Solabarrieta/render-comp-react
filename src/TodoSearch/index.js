@@ -1,10 +1,8 @@
-import { TodoContext } from "../TodoContext";
 import "./TodoSearch.css";
 
 import React from "react";
 
-function TodoSearch() {
-  const { searchValue, setSearchValue } = React.useContext(TodoContext)
+function TodoSearch({ searchValue, setSearchValue }) {
   return (
     <input
       placeholder="Hacer curso React.js"
