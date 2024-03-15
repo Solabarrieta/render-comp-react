@@ -2,7 +2,7 @@ import "./TodoSearch.css";
 
 import React from "react";
 
-function TodoSearch({ searchValue, setSearchValue }) {
+function TodoSearch({ searchValue, setSearchValue, loading }) {
   return (
     <input
       placeholder="Hacer curso React.js"
@@ -11,6 +11,7 @@ function TodoSearch({ searchValue, setSearchValue }) {
       onChange={(event) => {
         setSearchValue(event.target.value);
       }}
+      disabled={loading}
     />
   );
 }
