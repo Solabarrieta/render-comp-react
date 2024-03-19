@@ -11,6 +11,7 @@ import { Modal } from "../Modal";
 import { TodoForm } from "../TodoForm";
 import { useTodos } from "./useTodo";
 import { TodoHeader } from "../TodoHeader";
+import { ChangeAlertWithSotrageListener } from "../ChangeAlert";
 
 // localStorage.removeItem('TODOS_V1');
 // const defaultTodos = [
@@ -37,7 +38,8 @@ function App() {
     completedTodos,
     totalTodos,
     searchValue,
-    setSearchValue
+    setSearchValue,
+    sinchronizeTodos
   } = useTodos();
 
   return (
@@ -92,6 +94,9 @@ function App() {
           />
         </Modal>
       }
+      <ChangeAlertWithSotrageListener
+        sinchronize={sinchronizeTodos}
+      />
     </>
   );
 }
