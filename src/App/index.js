@@ -11,7 +11,7 @@ import { Modal } from "../Modal";
 import { TodoForm } from "../TodoForm";
 import { useTodos } from "./useTodo";
 import { TodoHeader } from "../TodoHeader";
-import { ChangeAlertWithSotrageListener } from "../ChangeAlert";
+import { ChangeAlert } from "../ChangeAlert";
 
 // localStorage.removeItem('TODOS_V1');
 // const defaultTodos = [
@@ -94,7 +94,7 @@ function App() {
           />
         </Modal>
       }
-      <ChangeAlertWithSotrageListener
+      <ChangeAlert
         sinchronize={sinchronizeTodos}
       />
     </>
